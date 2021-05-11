@@ -24,7 +24,14 @@ RUN curl -fSsL -O https://github.com/bazelbuild/bazel/releases/download/$BAZEL_V
 
 # install openVINO
 #ARG DLDT_PACKAGE_URL=http://nncv-nas-01.ccr.corp.intel.com/ovino-pkg/packages/nightly/2020WW42.2/master/121/irc/linux/l_openvino_toolkit_p_2021.1.121.tgz
-ARG DLDT_PACKAGE_URL=http://nncv-nas-01.ccr.corp.intel.com/ovino-pkg/packages/nightly/2020WW47.4/releases/2021/2/150/irc/linux/l_openvino_toolkit_p_2021.2.150.tgz
+#ARG DLDT_PACKAGE_URL=http://nncv-nas-01.ccr.corp.intel.com/ovino-pkg/packages/nightly/2020WW47.4/releases/2021/2/150/irc/linux/l_openvino_toolkit_p_2021.2.150.tgz
+#ARG DLDT_PACKAGE_URL=http://s3.toolbox.iotg.sclab.intel.com/ov-packages/l_openvino_toolkit_p_2021.4.512.tgz
+#ARG DLDT_PACKAGE_URL=http://s3.toolbox.iotg.sclab.intel.com/ov-packages/l_openvino_toolkit_p_2021.3.394.tgz
+#ARG DLDT_PACKAGE_URL=http://s3.toolbox.iotg.sclab.intel.com/ov-packages/l_openvino_toolkit_p_2021.4.453.tgz
+#ARG DLDT_PACKAGE_URL=http://s3.toolbox.iotg.sclab.intel.com/ov-packages/l_openvino_toolkit_p_2021.3.451.tgz
+#ARG DLDT_PACKAGE_URL=http://s3.toolbox.iotg.sclab.intel.com/ov-packages/l_openvino_toolkit_p_2021.3.413.tgz
+#ARG DLDT_PACKAGE_URL=http://s3.toolbox.iotg.sclab.intel.com/ov-packages/l_openvino_toolkit_p_2021.3.433.tgz
+ARG DLDT_PACKAGE_URL=http://s3.toolbox.iotg.sclab.intel.com/ov-packages/l_openvino_toolkit_p_2021.3.429.tgz
 RUN wget $DLDT_PACKAGE_URL && \
     tar -zxf l_openvino_toolkit*.tgz && \
     cd l_openvino_toolkit* && \
@@ -41,6 +48,11 @@ COPY model/ /model/
 
 # build with cmake
 ENV TBB_DIR=/opt/intel/openvino/inference_engine/external/tbb/cmake/
+#RUN yum -y install gcc-c++
+RUN gcc --version && g++ --version
+RUN ls /opt/intel
+#ENV CC=/usr/bin/gcc
+#ENV CXX=/usr/bin/g++
 RUN source /opt/intel/openvino/bin/setupvars.sh && cmake . && make
 ARG REBUILD_FROM_HERE=
 
