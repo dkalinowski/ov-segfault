@@ -13,4 +13,5 @@ Centos 7.6
 |8.3.1|l_openvino_toolkit_p_2021.3.413.tgz|NO|24-Mar-2021 22:06|
 |8.3.1|l_openvino_toolkit_p_2021.3.494.tgz|NO|22-Mar-2021 20:31|
 
-Works with GCC 4.8.5.
+No segfault with GCC 4.8.5.
+No segfault on RHEL.
